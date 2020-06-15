@@ -1,0 +1,165 @@
+
+$view-background: #232323
+$view-grid: lighten($view-background, 10%)
+
+node-element
+    position: absolute
+
+.node-view
+    height: 50vh
+    position: relative
+    user-select: none
+
+    .controls
+        background-color: #fff5
+        border-radius: 4px
+        bottom: 8px
+        font-size: .8em
+        overflow: hidden
+        position: absolute
+        right: 8px
+        z-index: 2
+
+        button
+            all: unset
+            padding: 4px
+
+.node-playground
+    background: radial-gradient(transparent, $view-background), repeating-linear-gradient(transparent, transparent 9px, $view-grid 10px), repeating-linear-gradient(90deg, transparent, transparent 9px, $view-grid 10px)
+    background-color: $view-background
+    height: 100%
+    overflow: auto
+    padding: 3%
+    position: relative
+    will-change: transform
+    z-index: 1
+
+    &.hand
+        cursor: grab
+    
+    & > svg
+        pointer-events: none
+        position: absolute
+        z-index: 0
+
+    .node-wrapper
+        $radius: 4px
+        
+        border-radius: $radius
+        box-shadow: 0 2px 5px #0006
+        display: inline-block
+        min-width: 100px
+        position: absolute
+        transition: all .1s ease
+        z-index: 1
+
+        .node
+            border-radius: $radius
+            color: #fff
+
+            &.immortal
+                .title
+                    .delete
+                        display: none
+
+            .title
+                align-items: center
+                background: linear-gradient(to top, transparent, #0003)
+                background-color: #9E343E
+                border-radius: $radius $radius 0 0
+                display: flex
+                font-family: monospace
+                font-size: 10px
+                position: relative
+                transition: all .3s ease
+                z-index: 2
+
+                > span
+                    display: block
+                    margin-right: 6px
+                    padding: 4px 0
+                    white-space: nowrap
+                    width: 100%
+
+                .toggle
+                    cursor: pointer
+                    padding: 4px 6px
+                    transition: transform .2s ease
+
+                    span
+                        background: currentColor
+                        display: block
+                        clip-path: polygon(50% 0, 100% 100%, 0 100%)
+                        height: 4px
+                        width: 6px
+
+                .delete
+                    cursor: pointer
+                    margin-left: auto
+                    opacity: 0
+                    padding: 4px 6px
+                    transition: all .3s ease
+
+                    span
+                        background: currentColor
+                        display: block
+                        clip-path: polygon(0 40%, 0 60%, 100% 60%, 100% 40%)
+                        height: 4px
+                        width: 8px
+
+                &:hover
+                    .delete
+                        opacity: 1
+
+
+            &.closed
+                height: 1em
+
+                .title
+                    border-radius: $radius
+
+                    .toggle
+                        transform: scaleY(-1)
+                
+                .node-box
+                    opacity: 0
+                    pointer-events: none
+                    transform: translateY(-1em)
+            
+            .node-box
+                background: #7B7B7B
+                border-radius: 0 0 $radius $radius
+                font-size: 12px
+                padding: 6px 8px
+                position: relative
+                transition: all .3s ease
+                z-index: 1
+
+                .param
+                    position: relative
+
+                    &:not(:last-child)
+                        margin-bottom: .5em
+
+                    .point
+                        background-color: white
+                        border: 1px solid $view-background
+                        border-radius: 50%
+                        display: block
+                        height: 8px
+                        position: absolute
+                        width: 8px
+                    
+                    &.param-in
+                        .point
+                            right: 100%
+                            top: 50%
+                            transform: translate(-50%, -50%)
+                    
+                    &.param-out
+                        text-align: right
+                        
+                        .point
+                            left: 100%
+                            top: 50%
+                            transform: translate(50%, -50%)
